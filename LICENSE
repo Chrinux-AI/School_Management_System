@@ -1,0 +1,133 @@
+MIT License
+
+Copyright (c) 2025 Student Attendance Management System (SAMS)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+
+ADDITIONAL TERMS AND CONDITIONS FOR EDUCATIONAL INSTITUTIONS
+
+This software is designed specifically for educational institutions. While the
+MIT License above grants broad permissions, we encourage the following:
+
+1. ATTRIBUTION
+
+   - Please maintain credits to the original SAMS project
+   - Include a notice that your system is "Powered by SAMS"
+
+2. CONTRIBUTIONS
+
+   - Contributions back to the main project are highly encouraged
+   - Bug fixes, feature improvements, and documentation enhancements welcome
+
+3. COMMERCIAL USE
+
+   - Commercial use is permitted under the MIT License
+   - For enterprise support contracts, please contact the project maintainers
+
+4. DATA PRIVACY
+
+   - Institutions using this software must comply with applicable data
+     protection laws (GDPR, FERPA, COPPA, etc.)
+   - Student data must be handled in accordance with local regulations
+   - Implement appropriate security measures for sensitive information
+
+5. LMS INTEGRATION
+
+   - LTI 1.3 integration features comply with IMS Global standards
+   - Ensure LMS platform licenses permit third-party tool integration
+   - Maintain secure key management practices
+
+6. THIRD-PARTY COMPONENTS
+   This software includes components licensed under their respective licenses:
+
+   - PHPMailer: LGPL 2.1
+   - Font Awesome: SIL OFL 1.1 (fonts), MIT (CSS)
+   - Chart.js: MIT License
+   - QRCode.js: MIT License
+   - jQuery (if used): MIT License
+   - Bootstrap (if used): MIT License
+
+================================================================================
+
+DISCLAIMER
+
+This software is provided for educational purposes. While every effort has been
+made to ensure accuracy and security, the authors and contributors:
+
+- Make no warranty regarding the software's fitness for any particular purpose
+- Are not liable for any data loss or security breaches
+- Recommend regular backups and security audits
+- Suggest professional security review before production deployment
+
+SECURITY NOTICE
+
+Educational institutions must:
+
+- Keep the software updated with security patches
+- Use strong, unique passwords for all accounts
+- Enable HTTPS/SSL for all deployments
+- Regularly audit system logs and access patterns
+- Comply with institutional IT security policies
+- Implement appropriate firewalls and network security
+
+SUPPORT AND UPDATES
+
+- Community support: GitHub Issues and Discussions
+- Security issues: Report privately to security@sams-project.org
+- Documentation: /docs directory and online wiki
+- Updates: Follow release notes and migration guides
+
+================================================================================
+
+VERSION HISTORY
+
+v2.1.0 (November 24, 2025)
+
+- Added LTI 1.3 LMS integration
+- Implemented OpenID Connect SSO
+- Added grade passback (AGS)
+- Implemented deep linking
+- Enhanced documentation
+
+v2.0.0 (November 2025)
+
+- Major UI overhaul with Cyberpunk theme
+- Biometric integration support
+- Real-time messaging system
+- AI-powered analytics
+- PWA implementation
+
+v1.0.0 (October 2025)
+
+- Initial release
+- Basic attendance tracking
+- Multi-role system
+- Email notifications
+
+================================================================================
+
+For questions about licensing, please open an issue on GitHub or contact:
+
+Email: info@sams-project.org
+GitHub: https://github.com/sams-attendance/sams
+Website: https://sams-attendance.org
+
+Last Updated: November 24, 2025

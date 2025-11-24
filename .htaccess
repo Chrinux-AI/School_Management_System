@@ -1,0 +1,25 @@
+# Attendance AI - Apache Configuration
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect old auth URLs to new location
+RewriteRule ^login\.php$ auth/login.php [L]
+RewriteRule ^register\.php$ auth/register.php [L]
+RewriteRule ^logout\.php$ auth/logout.php [L]
+RewriteRule ^forgot-password\.php$ auth/forgot-password.php [L]
+RewriteRule ^reset-password\.php$ auth/reset-password.php [L]
+RewriteRule ^verify-email\.php$ auth/verify-email.php [L]
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect sensitive directories
+<FilesMatch "\.(md|sql|sh|py|lock)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect setup directory (use Files instead of Directory in .htaccess)
+# For complete protection, configure this in Apache's main config or VirtualHost
+RedirectMatch 403 ^/_setup/.*$
