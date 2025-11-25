@@ -29,6 +29,8 @@ echo "<!DOCTYPE html>
         .error { color: #FF4500; }
         .info { color: #FFD700; }
     </style>
+    <link rel="stylesheet" href="../assets/css/cyberpunk-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="cyber-bg">
     <div class="starfield"></div>

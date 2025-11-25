@@ -261,6 +261,8 @@ $available_percentage = 100 - $used_percentage;
             transition: width 0.5s ease;
         }
     </style>
+    <link rel="stylesheet" href="../assets/css/cyberpunk-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="cloud-dashboard cyber-bg">

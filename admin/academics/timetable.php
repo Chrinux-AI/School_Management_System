@@ -89,9 +89,11 @@ include '../../includes/cyber-nav.php';
             color: var(--text-secondary);
         }
     </style>
+    <link rel="stylesheet" href="../assets/css/cyberpunk-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body class="cyber-bg cyber-bg">
     <div class="main-content">
         <div class="page-header">
             <h1><i class="fas fa-calendar-week"></i> <?php echo $page_title; ?></h1>

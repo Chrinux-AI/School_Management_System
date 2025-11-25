@@ -379,6 +379,8 @@ foreach ($health_metrics as $metric) {
             border-left: 4px solid #3b82f6;
         }
     </style>
+    <link rel="stylesheet" href="../assets/css/cyberpunk-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body class="cyber-bg">

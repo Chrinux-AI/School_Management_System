@@ -12,7 +12,7 @@ require_once 'includes/database.php';
 
 // Check if user is logged in
 if (!is_logged_in()) {
-    redirect('modern-index.php');
+    redirect('home.php');
 }
 
 // Get user role and redirect appropriately
@@ -23,13 +23,16 @@ switch ($role) {
         redirect('admin/dashboard.php');
         break;
     case 'teacher':
-        redirect('admin/dashboard.php'); // Teachers also use admin panel
+        redirect('teacher/dashboard.php');
         break;
     case 'student':
         redirect('student/dashboard.php');
         break;
+    case 'parent':
+        redirect('parent/dashboard.php');
+        break;
     default:
-        redirect('modern-index.php');
+        redirect('home.php');
         break;
 }
 
@@ -150,7 +153,7 @@ exit;
 <body class="cyber-bg">
     <div class="starfield"></div>
     <div class="cyber-grid"></div>
-<a href="logout.php" class="logout-btn">
+    <a href="logout.php" class="logout-btn">
         <i class="fas fa-sign-out-alt"></i> Logout
     </a>
 

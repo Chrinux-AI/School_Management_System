@@ -32,9 +32,11 @@ include '../../includes/cyber-nav.php';
     <title><?php echo $page_title; ?> - SMS</title>
     <link rel="stylesheet" href="../../assets/css/cyber-theme.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/cyberpunk-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body class="cyber-bg cyber-bg">
     <div class="main-content">
         <div class="page-header">
             <h1><i class="fas fa-bus"></i> <?php echo $page_title; ?></h1>
