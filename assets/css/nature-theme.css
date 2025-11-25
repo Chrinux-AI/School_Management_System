@@ -687,14 +687,14 @@ a:hover {
     display: block; /* Always visible for sidebar toggle */
     position: fixed;
     top: 20px;
-    left: 300px; /* Position outside sidebar */
-    z-index: 1001;
+    left: 20px; /* Position ON the sidebar */
+    z-index: 1002; /* Above sidebar */
     background: linear-gradient(135deg, var(--nature-green-600), var(--nature-green-800));
     border: none;
     border-radius: var(--radius-lg);
     padding: 12px 15px;
     cursor: pointer;
-    transition: left var(--transition-base), transform 0.3s ease;
+    transition: all var(--transition-base);
     box-shadow: var(--shadow-lg);
 }
 

@@ -286,7 +286,6 @@ if ($user_role === 'admin') {
         const sidebar = document.getElementById('cyberSidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const hamburgerBtn = document.getElementById('sidebarToggle');
 
         if (sidebarToggle && sidebar && sidebarOverlay) {
             // Toggle sidebar
@@ -298,14 +297,8 @@ if ($user_role === 'admin') {
                     sidebar.classList.toggle('active');
                     sidebarOverlay.classList.toggle('active');
                 } else {
-                    // Desktop: use .hidden class and adjust hamburger position
+                    // Desktop: use .hidden class
                     sidebar.classList.toggle('hidden');
-                    // Hamburger position is handled by CSS
-                    if (sidebar.classList.contains('hidden')) {
-                        hamburgerBtn.style.left = '20px';
-                    } else {
-                        hamburgerBtn.style.left = '300px';
-                    }
                 }
             });
 

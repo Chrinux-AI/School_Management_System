@@ -1087,12 +1087,16 @@ h1, h2, h3, h4, h5, h6 {
     display: block; /* Always visible for sidebar toggle */
     position: fixed;
     top: 20px;
-    left: 300px; /* Position it just outside the sidebar (280px + 20px margin) */
-    z-index: 1001;
+    left: 20px; /* Position ON the sidebar */
+    z-index: 1002; /* Above sidebar (1000) */
     background: linear-gradient(135deg, var(--cyber-purple), var(--cyber-cyan));
     border: none;
     border-radius: 8px;
     padding: 12px 15px;
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+}
     cursor: pointer;
     transition: all var(--transition-smooth);
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
