@@ -29,7 +29,17 @@ $dashboard_url = $dashboard_map[$user_role] ?? '../index.php';
 
 <div class="cyber-layout">
     <!-- Sidebar -->
-    <aside class="cyber-sidebar" id="sidebar">
+    ?>
+
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger-btn" id="sidebarToggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="cyber-sidebar" id="cyberSidebar">
         <!-- Sidebar Brand -->
         <div class="sidebar-brand">
             <div class="brand-orb">
@@ -122,10 +132,36 @@ $dashboard_url = $dashboard_map[$user_role] ?? '../index.php';
         </div>
     </aside>
 
-    <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
+    <!-- Sidebar Toggle Script -->
+    <script>
+        (function() {
+            const sidebar = document.getElementById('cyberSidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            if (toggle && sidebar && overlay) {
+                toggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('active');
+                    overlay.classList.toggle('active');
+                });
+
+                overlay.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+
+                const menuItems = sidebar.querySelectorAll('.nav-item');
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        if (window.innerWidth <= 1024) {
+                            sidebar.classList.remove('active');
+                            overlay.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
 
     <!-- Main Content -->
     <main class="cyber-main" id="mainContent">

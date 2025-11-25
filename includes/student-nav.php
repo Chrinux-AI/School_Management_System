@@ -112,7 +112,18 @@ $nav_sections = [
 ?>
 
 <!-- Cyberpunk Student Sidebar -->
-<aside class="cyber-sidebar slide-in">
+}
+?>
+
+<!-- Hamburger Menu Button -->
+<button class="hamburger-btn" id="sidebarToggle" aria-label="Toggle Sidebar">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Sidebar Overlay for Mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="cyber-sidebar slide-in" id="cyberSidebar">
     <!-- Brand Section -->
     <div class="sidebar-brand">
         <div class="brand-orb">
@@ -201,6 +212,37 @@ $nav_sections = [
         <div class="version-info">v2.1.0 Enhanced</div>
     </div>
 </aside>
+
+<!-- Sidebar Toggle Script -->
+<script>
+    (function() {
+        const sidebar = document.getElementById('cyberSidebar');
+        const toggle = document.getElementById('sidebarToggle');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (toggle && sidebar && overlay) {
+            toggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+
+            const menuItems = sidebar.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        }
+    })();
+</script>
 
 <!-- Chatbot Integration Script -->
 <script>
