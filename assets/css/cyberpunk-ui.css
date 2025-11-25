@@ -62,6 +62,7 @@ body {
     color: var(--text-secondary);
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -77,6 +78,15 @@ h1, h2, h3, h4, h5, h6 {
    ANIMATED STARFIELD BACKGROUND
    ======================================== */
 .cyber-bg {
+    position: relative;
+    min-height: 100vh;
+    background: var(--void-black);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Fixed background layer (for use as separate div) */
+.cyber-bg-layer {
     position: fixed;
     top: 0;
     left: 0;
@@ -84,10 +94,11 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     background: var(--void-black);
     z-index: -2;
-    overflow: hidden;
+    pointer-events: none;
 }
 
-.cyber-bg::before {
+.cyber-bg::before,
+.cyber-bg-layer::before {
     content: '';
     position: absolute;
     top: 0;

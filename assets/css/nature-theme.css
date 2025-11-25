@@ -140,6 +140,7 @@ body {
     background: linear-gradient(135deg, var(--nature-green-50) 0%, var(--nature-green-100) 50%, var(--off-white) 100%);
     min-height: 100vh;
     overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
 }
 

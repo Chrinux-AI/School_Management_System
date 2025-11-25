@@ -12,20 +12,129 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
 $student_id = $_SESSION['user_id'];
 $full_name = $_SESSION['full_name'];
 
-// Get student's attendance summary
-$records = db()->fetchAll("SELECT * FROM attendance_records WHERE student_id = ?", [$student_id]);
-$present = count(array_filter($records, fn($r) => $r['status'] === 'present'));
-$late = count(array_filter($records, fn($r) => $r['status'] === 'late'));
-$absent = count(array_filter($records, fn($r) => $r['status'] === 'absent'));
-$total = count($records);
-$attendance_rate = $total > 0 ? round((($present + $late) / $total) * 100, 1) : 0;
+// Get student full info with class details
+$student = db()->fetchOne("
+    SELECT s.*, u.first_name, u.last_name, u.email, u.profile_picture,
+           c.class_name, c.section, c.grade_level, c.id as class_id
+    FROM students s
+    JOIN users u ON s.user_id = u.id
+    LEFT JOIN class_enrollments ce ON s.id = ce.student_id AND ce.is_active = 1
+    LEFT JOIN classes c ON ce.class_id = c.id
+    WHERE s.user_id = ?
+", [$student_id]) ?? [];
 
-// Get student's classes
-$classes = db()->fetchAll("
-    SELECT c.* FROM classes c
-    JOIN class_enrollments ce ON c.id = ce.class_id
-    WHERE ce.student_id = ?
+// Attendance Statistics (Last 30 days)
+$attendance_stats = db()->fetchOne("
+    SELECT
+        COUNT(*) as total_days,
+        SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END) as present_days,
+        SUM(CASE WHEN status = 'absent' THEN 1 ELSE 0 END) as absent_days,
+        SUM(CASE WHEN status = 'late' THEN 1 ELSE 0 END) as late_days
+    FROM attendance
+    JOIN students st ON attendance.student_id = st.id
+    WHERE st.user_id = ? AND attendance.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+", [$student_id]) ?? ['total_days' => 0, 'present_days' => 0, 'absent_days' => 0, 'late_days' => 0];
+
+$attendance_rate = $attendance_stats['total_days'] > 0
+    ? round(($attendance_stats['present_days'] / $attendance_stats['total_days']) * 100, 1)
+    : 100;
+
+// Normalize attendance values for display
+$present = isset($attendance_stats['present_days']) ? (int)$attendance_stats['present_days'] : 0;
+$late = isset($attendance_stats['late_days']) ? (int)$attendance_stats['late_days'] : 0;
+$absent = isset($attendance_stats['absent_days']) ? (int)$attendance_stats['absent_days'] : 0;
+
+// Classes / enrollments for the student (used by "My Classes" card)
+$classes = db()->fetchAll(
+    "SELECT c.*, ce.room_number, ce.enrolled_on
+     FROM class_enrollments ce
+     JOIN classes c ON ce.class_id = c.id
+     JOIN students st ON ce.student_id = st.id
+     WHERE st.user_id = ? AND ce.is_active = 1",
+    [$student_id]
+) ?? [];
+// Upcoming Assignments
+$assignments = db()->fetchAll("
+    SELECT a.*, s.subject_name,
+           DATEDIFF(a.due_date, CURDATE()) as days_remaining
+    FROM assignments a
+    JOIN subjects s ON a.subject_id = s.id
+    JOIN class_enrollments ce ON a.class_id = ce.class_id
+    JOIN students st ON ce.student_id = st.id
+    WHERE st.user_id = ? AND a.due_date >= CURDATE() AND a.status = 'active'
+    ORDER BY a.due_date
+    LIMIT 5
 ", [$student_id]);
+
+// Upcoming Exams
+$exams = db()->fetchAll("
+    SELECT e.*, s.subject_name
+    FROM examinations e
+    LEFT JOIN subjects s ON e.subject_id = s.id
+    WHERE e.grade_level = ? AND e.exam_date >= CURDATE()
+    ORDER BY e.exam_date
+    LIMIT 5
+", [$student['grade_level'] ?? '']);
+
+// Recent Grades
+$grades = db()->fetchAll("
+    SELECT er.*, e.exam_name, s.subject_name,
+           ROUND((er.marks_obtained / er.total_marks) * 100, 1) as percentage
+    FROM exam_results er
+    JOIN examinations e ON er.exam_id = e.id
+    JOIN subjects s ON er.subject_id = s.id
+    JOIN students st ON er.student_id = st.id
+    WHERE st.user_id = ?
+    ORDER BY e.exam_date DESC
+    LIMIT 5
+", [$student_id]);
+
+// Fee Status
+$fee_status = db()->fetchOne("
+    SELECT
+        IFNULL(SUM(fii.amount), 0) as total_due,
+        IFNULL((SELECT SUM(amount_paid) FROM fee_payments WHERE invoice_id IN (
+            SELECT id FROM fee_invoices WHERE student_id = st.id
+        )), 0) as total_paid
+    FROM fee_invoices fi
+    LEFT JOIN fee_invoice_items fii ON fi.id = fii.invoice_id
+    JOIN students st ON fi.student_id = st.id
+    WHERE st.user_id = ? AND fi.academic_year = '2024-2025'
+", [$student_id]) ?? ['total_due' => 0, 'total_paid' => 0];
+
+$fee_balance = $fee_status['total_due'] - $fee_status['total_paid'];
+
+// Library Books
+$library_books = db()->fetchAll("
+    SELECT lir.*, lb.book_title, lb.author,
+           DATEDIFF(lir.due_date, CURDATE()) as days_remaining
+    FROM library_issue_return lir
+    JOIN library_books lb ON lir.book_id = lb.id
+    JOIN students st ON lir.member_id = st.id
+    WHERE st.user_id = ? AND lir.status = 'issued'
+    ORDER BY lir.due_date
+", [$student_id]);
+
+// Unread Messages
+$unread_messages = db()->fetchOne("
+    SELECT COUNT(*) as count
+    FROM message_recipients mr
+    WHERE mr.recipient_id = ? AND mr.is_read = 0
+", [$student_id])['count'] ?? 0;
+
+// Today's Schedule
+$today_day = date('w') - 1; // 0 = Monday
+if ($today_day < 0) $today_day = 6; // Sunday becomes 6
+
+$today_schedule = db()->fetchAll("
+    SELECT t.*, s.subject_name, CONCAT(u.first_name, ' ', u.last_name) as teacher_name
+    FROM timetable t
+    JOIN subjects s ON t.subject_id = s.id
+    LEFT JOIN teachers te ON t.teacher_id = te.id
+    LEFT JOIN users u ON te.user_id = u.id
+    WHERE t.class_id = ? AND t.day_of_week = ?
+    ORDER BY t.period_number
+", [$student['class_id'] ?? 0, $today_day]);
 
 $page_title = 'Student Dashboard';
 $page_icon = 'user-graduate';
@@ -52,13 +161,13 @@ $page_icon = 'user-graduate';
     <div class="starfield"></div>
     <div class="cyber-grid"></div>
 
-        <div class="starfield"></div>
+    <div class="starfield"></div>
     <div class="cyber-grid"></div>
 
-        <div class="starfield"></div>
+    <div class="starfield"></div>
     <div class="cyber-grid"></div>
 
-        <div class="cyber-bg">
+    <div class="cyber-bg">
         <div class="starfield"></div>
     </div>
     <div class="cyber-grid"></div>

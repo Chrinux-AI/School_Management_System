@@ -44,9 +44,43 @@ if ($user_role === 'admin') {
             'classes.php' => ['icon' => 'door-open', 'label' => 'Classes', 'badge' => null],
             'attendance.php' => ['icon' => 'check-circle', 'label' => 'Attendance', 'badge' => null],
         ],
-        'Academic' => [
-            'events.php' => ['icon' => 'calendar-alt', 'label' => 'Events', 'badge' => null],
-            'fee-management.php' => ['icon' => 'money-bill-wave', 'label' => 'Fee Management', 'badge' => null],
+        'Academics' => [
+            'academics/subjects.php' => ['icon' => 'book-open', 'label' => 'Subjects', 'badge' => null],
+            'academics/syllabus.php' => ['icon' => 'list-alt', 'label' => 'Syllabus', 'badge' => null],
+            'academics/exams.php' => ['icon' => 'clipboard-check', 'label' => 'Examinations', 'badge' => null],
+            'academics/timetable.php' => ['icon' => 'calendar-week', 'label' => 'Timetable', 'badge' => null],
+        ],
+        'Finance' => [
+            'finance/fee-structures.php' => ['icon' => 'money-bill-wave', 'label' => 'Fee Structures', 'badge' => null],
+            'finance/invoices.php' => ['icon' => 'file-invoice-dollar', 'label' => 'Invoices', 'badge' => null],
+            'finance/payments.php' => ['icon' => 'credit-card', 'label' => 'Payments', 'badge' => null],
+            'finance/payroll.php' => ['icon' => 'hand-holding-usd', 'label' => 'Payroll', 'badge' => null],
+        ],
+        'Library' => [
+            'library/books.php' => ['icon' => 'book', 'label' => 'Books', 'badge' => null],
+            'library/issue-return.php' => ['icon' => 'exchange-alt', 'label' => 'Issue/Return', 'badge' => null],
+            'library/members.php' => ['icon' => 'id-card', 'label' => 'Members', 'badge' => null],
+        ],
+        'Transport' => [
+            'transport/routes.php' => ['icon' => 'route', 'label' => 'Routes', 'badge' => null],
+            'transport/vehicles.php' => ['icon' => 'bus', 'label' => 'Vehicles', 'badge' => null],
+            'transport/drivers.php' => ['icon' => 'id-badge', 'label' => 'Drivers', 'badge' => null],
+        ],
+        'Hostel' => [
+            'hostel/hostels.php' => ['icon' => 'building', 'label' => 'Hostels', 'badge' => null],
+            'hostel/rooms.php' => ['icon' => 'bed', 'label' => 'Rooms', 'badge' => null],
+            'hostel/allocations.php' => ['icon' => 'user-plus', 'label' => 'Allocations', 'badge' => null],
+        ],
+        'HR & Payroll' => [
+            'hr/departments.php' => ['icon' => 'sitemap', 'label' => 'Departments', 'badge' => null],
+            'hr/staff.php' => ['icon' => 'users', 'label' => 'Staff', 'badge' => null],
+            'hr/attendance.php' => ['icon' => 'clock', 'label' => 'Staff Attendance', 'badge' => null],
+            'hr/leave.php' => ['icon' => 'calendar-times', 'label' => 'Leave Management', 'badge' => null],
+        ],
+        'Inventory' => [
+            'inventory/assets.php' => ['icon' => 'boxes', 'label' => 'Assets', 'badge' => null],
+            'inventory/stock.php' => ['icon' => 'warehouse', 'label' => 'Stock', 'badge' => null],
+            'inventory/purchase-orders.php' => ['icon' => 'shopping-cart', 'label' => 'Purchase Orders', 'badge' => null],
         ],
         'Communication' => [
             '../messages.php' => ['icon' => 'comments', 'label' => 'Messages', 'badge' => $unread_count > 0 ? $unread_count : null],
@@ -118,10 +152,29 @@ if ($user_role === 'admin') {
         ],
         'Academic' => [
             'class-registration.php' => ['icon' => 'user-plus', 'label' => 'Class Registration', 'badge' => null],
+            'subjects.php' => ['icon' => 'book-open', 'label' => 'My Subjects', 'badge' => null],
             'assignments.php' => ['icon' => 'clipboard-list', 'label' => 'Assignments', 'badge' => null],
             'grades.php' => ['icon' => 'chart-line', 'label' => 'My Grades', 'badge' => null],
+            'exams.php' => ['icon' => 'clipboard-check', 'label' => 'Examinations', 'badge' => null],
             'events.php' => ['icon' => 'calendar-check', 'label' => 'Events', 'badge' => null],
             'lms-portal.php' => ['icon' => 'graduation-cap', 'label' => 'LMS Portal', 'badge' => 'LMS'],
+        ],
+        'Finance' => [
+            'fee-invoices.php' => ['icon' => 'file-invoice', 'label' => 'Fee Invoices', 'badge' => null],
+            'payments.php' => ['icon' => 'credit-card', 'label' => 'Make Payment', 'badge' => null],
+        ],
+        'Library' => [
+            'search-books.php' => ['icon' => 'search', 'label' => 'Search Books', 'badge' => null],
+            'my-books.php' => ['icon' => 'book-reader', 'label' => 'My Books', 'badge' => null],
+        ],
+        'Transport' => [
+            'my-route.php' => ['icon' => 'route', 'label' => 'My Route', 'badge' => null],
+            'track-bus.php' => ['icon' => 'map-marked-alt', 'label' => 'Track Bus', 'badge' => null],
+        ],
+        'Hostel' => [
+            'my-room.php' => ['icon' => 'bed', 'label' => 'My Room', 'badge' => null],
+            'mess-menu.php' => ['icon' => 'utensils', 'label' => 'Mess Menu', 'badge' => null],
+            'complaints.php' => ['icon' => 'exclamation-circle', 'label' => 'Complaints', 'badge' => null],
         ],
         'Communication' => [
             'communication.php' => ['icon' => 'comment-dots', 'label' => 'Student Chat', 'badge' => 'NEW'],
