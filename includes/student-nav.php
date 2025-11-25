@@ -129,7 +129,7 @@ $nav_sections = [
         <div class="brand-orb">
             <i class="fas fa-graduation-cap"></i>
         </div>
-        <h2 class="brand-title">School Management System</h2>
+        <h2 class="brand-title">SMS</h2>
         <p class="brand-subtitle">STUDENT PANEL</p>
     </div>
 

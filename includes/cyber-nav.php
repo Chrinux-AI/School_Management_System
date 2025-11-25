@@ -236,8 +236,8 @@ if ($user_role === 'admin') {
         <div class="brand-orb">
             <i class="fas fa-graduation-cap"></i>
         </div>
-        <h2 class="brand-title">School Management System</h2>
-        <p class="brand-subtitle">Management System</p>
+        <h2 class="brand-title">SMS</h2>
+        <p class="brand-subtitle">School Management System</p>
     </div>
 
     <!-- Navigation Menu -->

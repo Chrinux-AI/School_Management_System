@@ -16,7 +16,7 @@ define('DB_NAME', 'attendance_system');
 define('DB_CHARSET', 'utf8mb4');
 
 // Application Settings
-define('APP_NAME', 'School Management System');
+define('APP_NAME', 'SMS');
 define('APP_VERSION', '1.0.0');
 define('APP_URL', 'http://localhost/attendance');
 define('TIMEZONE', 'America/New_York');
@@ -43,7 +43,7 @@ define('SMTP_PORT', getenv('SMTP_PORT') ?: 587);
 define('SMTP_USERNAME', getenv('SMTP_USERNAME') ?: 'your-email@gmail.com');
 define('SMTP_PASSWORD', getenv('SMTP_PASSWORD') ?: 'your-app-password');  // Gmail App Password - use .env file
 define('SMTP_FROM_EMAIL', getenv('SMTP_FROM_EMAIL') ?: 'your-email@gmail.com');
-define('SMTP_FROM_NAME', getenv('SMTP_FROM_NAME') ?: 'School Management System');
+define('SMTP_FROM_NAME', getenv('SMTP_FROM_NAME') ?: 'SMS');
 define('SMTP_ENCRYPTION', 'tls');  // Use 'tls' for port 587, or 'ssl' for port 465
 
 // WhatsApp Configuration (Twilio)
