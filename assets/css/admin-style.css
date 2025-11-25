@@ -484,14 +484,14 @@ tbody tr:hover {
     display: block; /* Always visible for sidebar toggle */
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 300px; /* Position outside sidebar */
     z-index: 1001;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border: none;
     border-radius: 8px;
     padding: 12px 15px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: left 0.3s, transform 0.3s;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
@@ -524,6 +524,7 @@ tbody tr:hover {
 @media (max-width: 1024px) {
     .hamburger-btn {
         display: block;
+        left: 20px !important; /* Always on left for mobile */
     }
 }
 

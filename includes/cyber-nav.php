@@ -286,15 +286,30 @@ if ($user_role === 'admin') {
         const sidebar = document.getElementById('cyberSidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const hamburgerBtn = document.getElementById('sidebarToggle');
 
         if (sidebarToggle && sidebar && sidebarOverlay) {
             // Toggle sidebar
             sidebarToggle.addEventListener('click', function() {
-                sidebar.classList.toggle('active');
-                sidebarOverlay.classList.toggle('active');
+                const isMobile = window.innerWidth <= 1024;
+                
+                if (isMobile) {
+                    // Mobile: use .active class
+                    sidebar.classList.toggle('active');
+                    sidebarOverlay.classList.toggle('active');
+                } else {
+                    // Desktop: use .hidden class and adjust hamburger position
+                    sidebar.classList.toggle('hidden');
+                    // Hamburger position is handled by CSS
+                    if (sidebar.classList.contains('hidden')) {
+                        hamburgerBtn.style.left = '20px';
+                    } else {
+                        hamburgerBtn.style.left = '300px';
+                    }
+                }
             });
 
-            // Close sidebar when clicking overlay
+            // Close sidebar when clicking overlay (mobile only)
             sidebarOverlay.addEventListener('click', function() {
                 sidebar.classList.remove('active');
                 sidebarOverlay.classList.remove('active');

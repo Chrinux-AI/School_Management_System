@@ -186,6 +186,11 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform var(--transition-smooth);
 }
 
+/* Hidden state for desktop */
+.cyber-sidebar.hidden {
+    transform: translateX(-100%);
+}
+
 .cyber-sidebar::-webkit-scrollbar {
     width: 6px;
 }
@@ -399,6 +404,13 @@ h1, h2, h3, h4, h5, h6 {
     width: calc(100% - 280px);
     min-height: 100vh;
     position: relative;
+    transition: margin-left var(--transition-smooth), width var(--transition-smooth);
+}
+
+/* Expand main content when sidebar is hidden */
+.cyber-sidebar.hidden ~ .cyber-main {
+    margin-left: 0;
+    width: 100%;
 }
 
 /* Top Header */
@@ -1075,16 +1087,21 @@ h1, h2, h3, h4, h5, h6 {
     display: block; /* Always visible for sidebar toggle */
     position: fixed;
     top: 20px;
-    left: 20px;
+    left: 300px; /* Position it just outside the sidebar (280px + 20px margin) */
     z-index: 1001;
     background: linear-gradient(135deg, var(--cyber-purple), var(--cyber-cyan));
-    border: 1px solid var(--glass-border);
+    border: none;
     border-radius: 8px;
     padding: 12px 15px;
     cursor: pointer;
     transition: all var(--transition-smooth);
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-    border: none;
+}
+
+/* Move hamburger to left when sidebar is hidden */
+.cyber-sidebar.active ~ .hamburger-btn,
+body.sidebar-hidden .hamburger-btn {
+    left: 20px;
 }
 
 .hamburger-btn:hover {
@@ -1133,6 +1150,7 @@ h1, h2, h3, h4, h5, h6 {
 
     .hamburger-btn {
         display: block;
+        left: 20px !important; /* Always on left on mobile */
     }
 
     .cyber-main {
